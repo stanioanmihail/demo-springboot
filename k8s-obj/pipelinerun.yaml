@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: hello-
+spec:
+  pipelineRef:
+    name: build-and-deploy-pipeline
+  params:
+    - name: gitUrl
+      value: https://github.com/stanioanmihail/demo-springboot.git
+    - name: gitRevision
+      value: main
+    - name: imageUrl
+      value: registry.kube-system.svc.cluster.local/default/test
+    - name: imageTag
+      value: "latest"
+    - name: pathToYamlFile
+      value: k8s-obj/deployment.yaml
+  serviceAccountName: pipeline-account
+  workspaces:
+    - name: git-source
+      persistentVolumeClaim:
+        claimName: git-source
+

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-spring-app
+  name: test-spring-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-spring-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-spring-app
+    spec:
+      containers:
+      - image: __IMAGE__@__DIGEST__
+        name: test
+        ports:
+          - name: http-server
+            containerPort: 8080
