@@ -18,7 +18,9 @@ spec:
     - name: pathToYamlFile
       description: The path to the yaml file to deploy within the git source
     - name: imageUrl
-      description: Image name including repository
+      description: Image name excluding repository
+    - name: imageRepo
+      description: Image repository
     - name: imageTag
       description: Image tag
       default: "latest"
@@ -50,7 +52,7 @@ spec:
         - name: CONTEXT
           value: $(params.pathToContext)
         - name: IMAGE
-          value: $(params.imageUrl):$(params.imageTag)
+          value: $(params.imageRepo)/$(params.imageUrl):$(params.imageTag)
     - name: deploy-to-cluster
       taskRef:
         name: deploy-using-kubectl
@@ -61,7 +63,7 @@ spec:
         - name: pathToYamlFile
           value: $(params.pathToYamlFile)
         - name: imageUrl
-          value: $(params.imageUrl)
+          value: localhost:5000/$(params.imageUrl)
         - name: imageTag
           value: $(params.imageTag)
         - name: imageDigest

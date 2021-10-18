@@ -11,7 +11,9 @@ spec:
     - name: gitRevision
       value: main
     - name: imageUrl
-      value: registry.kube-system.svc.cluster.local/default/test
+      value: hello
+    - name: imageRepo
+      value: registry.kube-system.svc.cluster.local
     - name: imageTag
       value: "latest"
     - name: pathToYamlFile
